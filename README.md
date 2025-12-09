@@ -55,13 +55,13 @@ erDiagram
       string nom
       string courriel
     }
-		INSCRIPTION {
-			string identifiant PK
-			decimal noteValeur
-		}
+    INSCRIPTION {
+        string identifiant PK
+        decimal noteValeur
+    }
 
-		ETUDIANT ||--o{ INSCRIPTION : estInscrit
-		COURS ||--o{ INSCRIPTION : contientInscription
-		ENSEIGNANT ||--o{ COURS : enseigne
+    ETUDIANT ||--o{ INSCRIPTION : estInscrit
+    COURS ||--o{ INSCRIPTION : contientInscription
+    ENSEIGNANT ||--o{ COURS : enseigne
 
 ```
