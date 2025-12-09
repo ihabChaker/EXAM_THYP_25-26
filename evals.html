@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Évaluations - Gestion des Évaluations</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"
+        integrity="sha512-vc58qvvBdrDR4etbxMdlTt4GBQk1qjvyORR2nrsPsFPyrs+/u5c3+1Ct6upOgdZoIl7eq6k3a1UPDSNAQi/32A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span>📚</span>
+                Gestion Évaluations
+            </a>
+            <ul class="nav-menu">
+                <li><a href="cours.html">Cours</a></li>
+                <li><a href="etudiants.html">Création</a></li>
+                <li><a href="evals.html" class="active">Évaluations</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Gestion des Évaluations</h1>
+            <p class="page-subtitle">Créez et consultez les évaluations des étudiants</p>
+        </div>
+
+        <!-- Formulaire de création d'évaluation -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <h2 style="margin-bottom: 1.5rem; color: var(--primary);">
+                ✍️ Créer une nouvelle évaluation
+            </h2>
+            <form id="evalForm" onsubmit="handleSubmitEval(event)">
+                <div class="filters-grid">
+                    <div class="form-group">
+                        <label for="etudiantSelect">Étudiant *</label>
+                        <select id="etudiantSelect" class="form-control" required>
+                            <option value="">Sélectionner un étudiant</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="coursSelect">Cours *</label>
+                        <select id="coursSelect" class="form-control" required>
+                            <option value="">Sélectionner un cours</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="noteInput">Note (0-20) *</label>
+                        <input type="number" id="noteInput" class="form-control" min="0" max="20" step="0.5" required
+                            placeholder="Ex: 15.5">
+                    </div>
+                </div>
+                <div style="margin-top: 1rem;">
+                    <button type="submit" class="btn btn-primary">
+                        💾 Enregistrer l'évaluation
+                    </button>
+                </div>
+            </form>
+            <div id="formMessage"></div>
+        </div>
+
+        <!-- Liste des évaluations -->
+        <div>
+            <h2 style="margin-bottom: 1.5rem; color: var(--primary);">
+                📊 Liste des évaluations
+            </h2>
+            <div id="evalsContainer">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Chargement des évaluations...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/evals.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cours - Gestion des Évaluations</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"
+        integrity="sha512-vc58qvvBdrDR4etbxMdlTt4GBQk1qjvyORR2nrsPsFPyrs+/u5c3+1Ct6upOgdZoIl7eq6k3a1UPDSNAQi/32A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span>📚</span>
+                Gestion Évaluations
+            </a>
+            <ul class="nav-menu">
+                <li><a href="cours.html" class="active">Cours</a></li>
+                <li><a href="etudiants.html">Étudiants</a></li>
+                <li><a href="evals.html">Évaluations</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Liste des Cours</h1>
+            <p class="page-subtitle">Consultez tous les cours et leurs étudiants inscrits</p>
+        </div>
+
+        <div class="filters-section">
+            <div class="filters-grid">
+                <div class="form-group">
+                    <label for="filterCode">Code du cours</label>
+                    <input type="text" id="filterCode" class="form-control" placeholder="Ex: THYP_25-26">
+                </div>
+                <div class="form-group">
+                    <label for="filterTitre">Titre</label>
+                    <input type="text" id="filterTitre" class="form-control" placeholder="Rechercher par titre">
+                </div>
+                <div class="form-group">
+                    <label for="filterCredits">Crédits minimum</label>
+                    <select id="filterCredits" class="form-control">
+                        <option value="">Tous</option>
+                        <option value="3">3+</option>
+                        <option value="6">6+</option>
+                        <option value="9">9+</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-actions">
+                <button class="btn btn-outline" onclick="resetFilters()">Réinitialiser</button>
+                <button class="btn btn-primary" onclick="applyFilters()">Appliquer les filtres</button>
+            </div>
+        </div>
+
+        <div id="coursContainer">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Chargement des cours...</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/cours.js"></script>
+</body>
+
+</html>

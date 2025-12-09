@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Étudiants - Gestion des Évaluations</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"
+        integrity="sha512-vc58qvvBdrDR4etbxMdlTt4GBQk1qjvyORR2nrsPsFPyrs+/u5c3+1Ct6upOgdZoIl7eq6k3a1UPDSNAQi/32A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span>📚</span>
+                Gestion Évaluations
+            </a>
+            <ul class="nav-menu">
+                <li><a href="cours.html">Cours</a></li>
+                <li><a href="etudiants.html" class="active">Créations</a></li>
+                <li><a href="evals.html">Évaluations</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Gestion des Étudiants</h1>
+            <p class="page-subtitle">Ajoutez et consultez les étudiants du Master</p>
+        </div>
+
+        <!-- Formulaire d'ajout d'étudiant -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <h2 style="margin-bottom: 1.5rem; color: var(--primary);">
+                ➕ Ajouter un nouvel étudiant
+            </h2>
+            <form id="etudiantForm" onsubmit="handleSubmitEtudiant(event)">
+                <div class="filters-grid">
+                    <div class="form-group">
+                        <label for="identifiantInput">Identifiant *</label>
+                        <input type="text" id="identifiantInput" class="form-control" required
+                            placeholder="Ex: ETU-2025-001">
+                    </div>
+                    <div class="form-group">
+                        <label for="nomInput">Nom complet *</label>
+                        <input type="text" id="nomInput" class="form-control" required placeholder="Ex: Dupont Marie">
+                    </div>
+                    <div class="form-group">
+                        <label for="courrielInput">Courriel *</label>
+                        <input type="email" id="courrielInput" class="form-control" required
+                            placeholder="Ex: marie.dupont@univ.fr">
+                    </div>
+                </div>
+                <div style="margin-top: 1rem;">
+                    <button type="submit" class="btn btn-primary">
+                        💾 Enregistrer l'étudiant
+                    </button>
+                </div>
+            </form>
+            <div id="etudiantFormMessage"></div>
+        </div>
+        <!-- Liste des étudiants -->
+        <div style="margin-bottom: 3rem;">
+            <h2 style="margin-bottom: 1.5rem; color: var(--primary);">
+                👥 Liste des étudiants
+            </h2>
+            <div id="etudiantsContainer">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Chargement des étudiants...</p>
+                </div>
+            </div>
+        </div>
+        <!-- Formulaire d'ajout de cours -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <h2 style="margin-bottom: 1.5rem; color: var(--primary);">
+                ➕ Ajouter un nouveau cours
+            </h2>
+            <form id="coursForm" onsubmit="handleSubmitCours(event)">
+                <div class="filters-grid">
+                    <div class="form-group">
+                        <label for="coursIdentifiantInput">Identifiant *</label>
+                        <input type="text" id="coursIdentifiantInput" class="form-control" required
+                            placeholder="Ex: COURS-2025-001">
+                    </div>
+                    <div class="form-group">
+                        <label for="titreInput">Titre du cours *</label>
+                        <input type="text" id="titreInput" class="form-control" required
+                            placeholder="Ex: Hypermédia et Web sémantique">
+                    </div>
+                    <div class="form-group">
+                        <label for="codeInput">Code *</label>
+                        <input type="text" id="codeInput" class="form-control" required placeholder="Ex: THYP_25-26">
+                    </div>
+                    <div class="form-group">
+                        <label for="creditsInput">Crédits ECTS *</label>
+                        <input type="number" id="creditsInput" class="form-control" required min="1" max="30"
+                            placeholder="Ex: 6">
+                    </div>
+                </div>
+                <div style="margin-top: 1rem;">
+                    <button type="submit" class="btn btn-primary">
+                        💾 Enregistrer le cours
+                    </button>
+                </div>
+            </form>
+            <div id="coursFormMessage"></div>
+        </div>
+
+
+
+        <!-- Liste des cours -->
+        <div>
+            <h2 style="margin-bottom: 1.5rem; color: var(--primary);">
+                📚 Liste des cours
+            </h2>
+            <div id="coursContainer">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Chargement des cours...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/etudiants.js"></script>
+</body>
+
+</html>

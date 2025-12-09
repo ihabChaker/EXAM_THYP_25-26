@@ -46,8 +46,8 @@
             "data_types": [],
             "vocabulary_namespace_uri": "http:\/\/example.org\/eval#",
             "vocabulary_label": "Eval",
-            "local_name": "recoit",
-            "label": "recoit"
+            "local_name": "estInscrit",
+            "label": "estInscrit"
         }
     ],
     "o:resource_class": {

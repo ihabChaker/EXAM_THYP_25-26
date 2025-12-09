@@ -46,8 +46,8 @@
             "data_types": [],
             "vocabulary_namespace_uri": "http:\/\/example.org\/eval#",
             "vocabulary_label": "Eval",
-            "local_name": "contient",
-            "label": "contient"
+            "local_name": "contientInscription",
+            "label": "contientInscription"
         }
     ],
     "o:resource_class": {

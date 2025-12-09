@@ -7,7 +7,7 @@
 
 <http://example.org/eval#> a owl:Ontology ;
     dcterms:title "Eval"@fr ;
-    dcterms:description "Vocabulaire simplifié : Etudiant, Cours, Enseignant et Note."@fr .
+    dcterms:description "Vocabulaire simplifié : Etudiant, Cours et Inscription."@fr .
 
 ### Classes (noms en français dans les IRIs)
 ev:Etudiant a rdfs:Class ;
@@ -16,21 +16,18 @@ ev:Etudiant a rdfs:Class ;
 ev:Cours a rdfs:Class ;
     rdfs:label "Cours"@fr .
 
-ev:Enseignant a rdfs:Class ;
-    rdfs:label "Enseignant"@fr .
-
-ev:Note a rdfs:Class ;
-    rdfs:label "Note"@fr .
+ev:Inscription a rdfs:Class ;
+    rdfs:label "Inscription"@fr .
 
 ### Propriétés de données (noms en français)
 ev:nom a rdf:Property ;
     rdfs:label "nom"@fr ;
-    rdfs:domain ev:Etudiant , ev:Enseignant , ev:Cours ;
+    rdfs:domain ev:Etudiant , ev:Cours ;
     rdfs:range xsd:string .
 
 ev:courriel a rdf:Property ;
     rdfs:label "courriel"@fr ;
-    rdfs:domain ev:Etudiant , ev:Enseignant ;
+    rdfs:domain ev:Etudiant ;
     rdfs:range xsd:string .
 
 ev:code a rdf:Property ;
@@ -45,14 +42,10 @@ ev:credits a rdf:Property ;
 
 ev:noteValeur a rdf:Property ;
     rdfs:label "noteValeur"@fr ;
-    rdfs:domain ev:Note ;
+    rdfs:domain ev:Inscription ;
     rdfs:range xsd:decimal .
 
 ### Propriétés d'objet (noms en français)
-
-# Nouvelle entité : Inscription lie un Etudiant et un Cours et porte la note
-ev:Inscription a rdfs:Class ;
-    rdfs:label "Inscription"@fr .
 
 ev:estInscrit a rdf:Property ;
     rdfs:label "estInscrit"@fr ;
@@ -71,12 +64,3 @@ ev:contientInscription a rdf:Property ;
     rdfs:domain ev:Cours ;
     rdfs:range ev:Inscription ;
     rdfs:comment "Relation : le cours contient des inscriptions"@fr .
-
-ev:enseigne a rdf:Property ;
-    rdfs:label "enseigne"@fr ;
-    rdfs:domain ev:Enseignant ;
-    rdfs:range ev:Cours ;
-    rdfs:comment "L'enseignant enseigne le cours"@fr .
-
-
-
