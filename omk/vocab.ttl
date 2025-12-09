@@ -6,151 +6,66 @@
 @prefix ev: <http://example.org/eval#> .
 
 <http://example.org/eval#> a owl:Ontology ;
-    dcterms:title "Vocabulaire d'évaluation des étudiants en cours de Master" ;
-    dcterms:description "-"@en .
+    dcterms:title "Eval"@fr ;
+    dcterms:description "Vocabulaire simplifié : Etudiant, Cours, Enseignant et Note."@fr .
 
-### Classes (alignées avec le diagramme Mermaid)
-ev:Student a rdfs:Class ;
-    rdfs:label "Student"@en .
+### Classes (noms en français dans les IRIs)
+ev:Etudiant a rdfs:Class ;
+    rdfs:label "Etudiant"@fr .
 
-ev:Course a rdfs:Class ;
-    rdfs:label "Course"@en .
+ev:Cours a rdfs:Class ;
+    rdfs:label "Cours"@fr .
 
-ev:Instructor a rdfs:Class ;
-    rdfs:label "Instructor"@en .
+ev:Enseignant a rdfs:Class ;
+    rdfs:label "Enseignant"@fr .
 
-ev:Evaluation a rdfs:Class ;
-    rdfs:label "Evaluation"@en .
+ev:Note a rdfs:Class ;
+    rdfs:label "Note"@fr .
 
-ev:Grade a rdfs:Class ;
-    rdfs:label "Grade"@en .
-
-### Data properties (attributes)
-ev:studentId a rdf:Property ;
-    rdfs:label "studentId" ;
-    rdfs:domain ev:Student ;
+### Propriétés de données (noms en français)
+ev:nom a rdf:Property ;
+    rdfs:label "nom"@fr ;
+    rdfs:domain ev:Etudiant , ev:Enseignant , ev:Cours ;
     rdfs:range xsd:string .
 
-ev:name a rdf:Property ;
-    rdfs:label "name" ;
-    rdfs:domain ev:Student , ev:Instructor , ev:Course ;
-    rdfs:range xsd:string .
-
-ev:email a rdf:Property ;
-    rdfs:label "email" ;
-    rdfs:domain ev:Student , ev:Instructor ;
-    rdfs:range xsd:string .
-
-ev:courseId a rdf:Property ;
-    rdfs:label "courseId" ;
-    rdfs:domain ev:Course ;
+ev:courriel a rdf:Property ;
+    rdfs:label "courriel"@fr ;
+    rdfs:domain ev:Etudiant , ev:Enseignant ;
     rdfs:range xsd:string .
 
 ev:code a rdf:Property ;
-    rdfs:label "code" ;
-    rdfs:domain ev:Course ;
+    rdfs:label "code"@fr ;
+    rdfs:domain ev:Cours ;
     rdfs:range xsd:string .
 
 ev:credits a rdf:Property ;
-    rdfs:label "credits" ;
-    rdfs:domain ev:Course ;
+    rdfs:label "credits"@fr ;
+    rdfs:domain ev:Cours ;
     rdfs:range xsd:integer .
 
-ev:evaluationId a rdf:Property ;
-    rdfs:label "evaluationId" ;
-    rdfs:domain ev:Evaluation ;
-    rdfs:range xsd:string .
-
-ev:date a rdf:Property ;
-    rdfs:label "date" ;
-    rdfs:domain ev:Evaluation ;
-    rdfs:range xsd:dateTime .
-
-ev:maxScore a rdf:Property ;
-    rdfs:label "maxScore" ;
-    rdfs:domain ev:Evaluation ;
+ev:noteValeur a rdf:Property ;
+    rdfs:label "noteValeur"@fr ;
+    rdfs:domain ev:Note ;
     rdfs:range xsd:decimal .
 
-ev:gradeId a rdf:Property ;
-    rdfs:label "gradeId" ;
-    rdfs:domain ev:Grade ;
-    rdfs:range xsd:string .
+### Propriétés d'objet (noms en français)
+ev:recoit a rdf:Property ;
+    rdfs:label "recoit"@fr ;
+    rdfs:domain ev:Etudiant ;
+    rdfs:range ev:Note ;
+    rdfs:comment "L'Etudiant reçoit une note"@fr .
 
-ev:score a rdf:Property ;
-    rdfs:label "score" ;
-    rdfs:domain ev:Grade ;
-    rdfs:range xsd:decimal .
+ev:contient a rdf:Property ;
+    rdfs:label "contient"@fr ;
+    rdfs:domain ev:Cours ;
+    rdfs:range ev:Note ;
+    rdfs:comment "Le cours contient des notes"@fr .
+
+ev:enseigne a rdf:Property ;
+    rdfs:label "enseigne"@fr ;
+    rdfs:domain ev:Enseignant ;
+    rdfs:range ev:Cours ;
+    rdfs:comment "L'enseignant enseigne le cours"@fr .
 
 
-### Object properties (relations) — alignées sur le diagramme
-ev:receivesGrade a rdf:Property ;
-    rdfs:label "receives" ;
-    rdfs:domain ev:Student ;
-    rdfs:range ev:Grade ;
-    rdfs:comment "Student receives Grade" .
-
-ev:containsGrade a rdf:Property ;
-    rdfs:label "contains" ;
-    rdfs:domain ev:Course ;
-    rdfs:range ev:Grade ;
-    rdfs:comment "Course contains Grade(s)" .
-
-ev:producesGrade a rdf:Property ;
-    rdfs:label "produces" ;
-    rdfs:domain ev:Evaluation ;
-    rdfs:range ev:Grade ;
-    rdfs:comment "Evaluation produces Grade" .
-
-ev:teaches a rdf:Property ;
-    rdfs:label "teaches" ;
-    rdfs:domain ev:Instructor ;
-    rdfs:range ev:Course ;
-    rdfs:comment "Instructor teaches Course" .
-
-ev:includesEvaluation a rdf:Property ;
-    rdfs:label "includes" ;
-    rdfs:domain ev:Course ;
-    rdfs:range ev:Evaluation ;
-    rdfs:comment "Course includes Evaluation(s)" .
-
-ev:participatesIn a rdf:Property ;
-    rdfs:label "participates_in" ;
-    rdfs:domain ev:Student ;
-    rdfs:range ev:Evaluation ;
-    rdfs:comment "Student participates in Evaluation" .
-
-### Example instances (aligned to diagram)
-ev:student001 a ev:Student ;
-    ev:studentId "S001" ;
-    ev:name "Inès Étudiant" ;
-    ev:email "ines@example.org" .
-
-ev:instructorA a ev:Instructor ;
-    ev:name "Dr. Dupont" ;
-    ev:email "dupont@example.edu" .
-
-ev:courseML a ev:Course ;
-    ev:courseId "CS500" ;
-    ev:title "Machine Learning (Master)" ;
-    ev:code "ML-2026" ;
-    ev:credits "6"^^xsd:integer ;
-    ev:teaches ev:instructorA .
-
-ev:examFinal a ev:Evaluation ;
-    ev:evaluationId "EV-001" ;
-    ev:date "2026-01-15T09:00:00"^^xsd:dateTime ;
-    ev:type "final" ;
-    ev:maxScore "100"^^xsd:decimal ;
-    ev:producesGrade ev:grade001 .
-
-ev:grade001 a ev:Grade ;
-    ev:gradeId "G-001" ;
-    ev:score "78"^^xsd:decimal ;
-    ev:gradeLetter "B" .
-
-# Relations matching the diagram
-ev:student001 ev:participatesIn ev:examFinal .
-ev:student001 ev:receivesGrade ev:grade001 .
-ev:courseML ev:includesEvaluation ev:examFinal .
-ev:courseML ev:containsGrade ev:grade001 .
 

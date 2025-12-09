@@ -7,37 +7,61 @@ Voici un diagramme Entité‑Association (ER) en syntaxe Mermaid pour modéliser
 
 ```mermaid
 erDiagram
-		STUDENT {
-			string studentId PK
-			string name
-			string email
+		ETUDIANT {
+			string identifiant PK
+			string nom
+			string courriel
 		}
-		COURSE {
-			string courseId PK
-			string title
+		COURS {
+			string identifiant PK
+			string titre
 			string code
 			int credits
 		}
-		INSTRUCTOR {
-			string instructorId PK
-			string name
-			string email
+		ENSEIGNANT {
+			string identifiant PK
+			string nom
+			string courriel
 		}
-		EVALUATION {
-			string evalId PK
-			date date
-			decimal maxScore
-		}
-		GRADE {
-			string gradeId PK
-			decimal score
+		NOTE {
+			string identifiant PK
+			decimal noteValeur
 		}
 
-		STUDENT ||--o{ GRADE : receives
-		COURSE ||--o{ GRADE : contains
-		EVALUATION ||--o{ GRADE : produces
-		INSTRUCTOR ||--o{ COURSE : teaches
-		COURSE ||--o{ EVALUATION : includes
-		STUDENT ||--o{ EVALUATION : participates_in
+		ETUDIANT ||--o{ NOTE : recoit
+		COURS ||--o{ NOTE : contient
+		ENSEIGNANT ||--o{ COURS : enseigne
+
+```
+## Diagramme Entité‑Association (Mermaid)
+
+Voici un diagramme Entité‑Association (ER) en syntaxe Mermaid pour modéliser un vocabulaire RDF/Turtle gérant les notes (grades) des étudiants dans les cours d'un Master — la notion d'"Evaluation" a été retirée.
+
+```mermaid
+erDiagram
+    ETUDIANT {
+      string identifiant PK
+      string nom
+      string courriel
+    }
+    COURS {
+      string identifiant PK
+      string titre
+      string code
+      int credits
+    }
+    ENSEIGNANT {
+      string identifiant PK
+      string nom
+      string courriel
+    }
+    NOTE {
+      string identifiant PK
+      decimal noteValeur
+    }
+
+    ETUDIANT ||--o{ NOTE : recoit
+    COURS ||--o{ NOTE : contient
+    ENSEIGNANT ||--o{ COURS : enseigne
 
 ```
