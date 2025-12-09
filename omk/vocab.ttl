@@ -49,17 +49,28 @@ ev:noteValeur a rdf:Property ;
     rdfs:range xsd:decimal .
 
 ### Propriétés d'objet (noms en français)
-ev:recoit a rdf:Property ;
-    rdfs:label "recoit"@fr ;
-    rdfs:domain ev:Etudiant ;
-    rdfs:range ev:Note ;
-    rdfs:comment "L'Etudiant reçoit une note"@fr .
 
-ev:contient a rdf:Property ;
-    rdfs:label "contient"@fr ;
+# Nouvelle entité : Inscription lie un Etudiant et un Cours et porte la note
+ev:Inscription a rdfs:Class ;
+    rdfs:label "Inscription"@fr .
+
+ev:estInscrit a rdf:Property ;
+    rdfs:label "estInscrit"@fr ;
+    rdfs:domain ev:Etudiant ;
+    rdfs:range ev:Inscription ;
+    rdfs:comment "Relation : l'étudiant a une inscription"@fr .
+
+ev:pourCours a rdf:Property ;
+    rdfs:label "pourCours"@fr ;
+    rdfs:domain ev:Inscription ;
+    rdfs:range ev:Cours ;
+    rdfs:comment "Relation : l'inscription concerne un cours"@fr .
+
+ev:contientInscription a rdf:Property ;
+    rdfs:label "contientInscription"@fr ;
     rdfs:domain ev:Cours ;
-    rdfs:range ev:Note ;
-    rdfs:comment "Le cours contient des notes"@fr .
+    rdfs:range ev:Inscription ;
+    rdfs:comment "Relation : le cours contient des inscriptions"@fr .
 
 ev:enseigne a rdf:Property ;
     rdfs:label "enseigne"@fr ;
