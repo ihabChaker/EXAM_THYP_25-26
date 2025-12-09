@@ -1,0 +1,156 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ev: <http://example.org/eval#> .
+
+<http://example.org/eval#> a owl:Ontology ;
+    dcterms:title "Vocabulaire d'évaluation des étudiants en cours de Master" ;
+    dcterms:description "-"@en .
+
+### Classes (alignées avec le diagramme Mermaid)
+ev:Student a rdfs:Class ;
+    rdfs:label "Student"@en .
+
+ev:Course a rdfs:Class ;
+    rdfs:label "Course"@en .
+
+ev:Instructor a rdfs:Class ;
+    rdfs:label "Instructor"@en .
+
+ev:Evaluation a rdfs:Class ;
+    rdfs:label "Evaluation"@en .
+
+ev:Grade a rdfs:Class ;
+    rdfs:label "Grade"@en .
+
+### Data properties (attributes)
+ev:studentId a rdf:Property ;
+    rdfs:label "studentId" ;
+    rdfs:domain ev:Student ;
+    rdfs:range xsd:string .
+
+ev:name a rdf:Property ;
+    rdfs:label "name" ;
+    rdfs:domain ev:Student , ev:Instructor , ev:Course ;
+    rdfs:range xsd:string .
+
+ev:email a rdf:Property ;
+    rdfs:label "email" ;
+    rdfs:domain ev:Student , ev:Instructor ;
+    rdfs:range xsd:string .
+
+ev:courseId a rdf:Property ;
+    rdfs:label "courseId" ;
+    rdfs:domain ev:Course ;
+    rdfs:range xsd:string .
+
+ev:code a rdf:Property ;
+    rdfs:label "code" ;
+    rdfs:domain ev:Course ;
+    rdfs:range xsd:string .
+
+ev:credits a rdf:Property ;
+    rdfs:label "credits" ;
+    rdfs:domain ev:Course ;
+    rdfs:range xsd:integer .
+
+ev:evaluationId a rdf:Property ;
+    rdfs:label "evaluationId" ;
+    rdfs:domain ev:Evaluation ;
+    rdfs:range xsd:string .
+
+ev:date a rdf:Property ;
+    rdfs:label "date" ;
+    rdfs:domain ev:Evaluation ;
+    rdfs:range xsd:dateTime .
+
+ev:maxScore a rdf:Property ;
+    rdfs:label "maxScore" ;
+    rdfs:domain ev:Evaluation ;
+    rdfs:range xsd:decimal .
+
+ev:gradeId a rdf:Property ;
+    rdfs:label "gradeId" ;
+    rdfs:domain ev:Grade ;
+    rdfs:range xsd:string .
+
+ev:score a rdf:Property ;
+    rdfs:label "score" ;
+    rdfs:domain ev:Grade ;
+    rdfs:range xsd:decimal .
+
+
+### Object properties (relations) — alignées sur le diagramme
+ev:receivesGrade a rdf:Property ;
+    rdfs:label "receives" ;
+    rdfs:domain ev:Student ;
+    rdfs:range ev:Grade ;
+    rdfs:comment "Student receives Grade" .
+
+ev:containsGrade a rdf:Property ;
+    rdfs:label "contains" ;
+    rdfs:domain ev:Course ;
+    rdfs:range ev:Grade ;
+    rdfs:comment "Course contains Grade(s)" .
+
+ev:producesGrade a rdf:Property ;
+    rdfs:label "produces" ;
+    rdfs:domain ev:Evaluation ;
+    rdfs:range ev:Grade ;
+    rdfs:comment "Evaluation produces Grade" .
+
+ev:teaches a rdf:Property ;
+    rdfs:label "teaches" ;
+    rdfs:domain ev:Instructor ;
+    rdfs:range ev:Course ;
+    rdfs:comment "Instructor teaches Course" .
+
+ev:includesEvaluation a rdf:Property ;
+    rdfs:label "includes" ;
+    rdfs:domain ev:Course ;
+    rdfs:range ev:Evaluation ;
+    rdfs:comment "Course includes Evaluation(s)" .
+
+ev:participatesIn a rdf:Property ;
+    rdfs:label "participates_in" ;
+    rdfs:domain ev:Student ;
+    rdfs:range ev:Evaluation ;
+    rdfs:comment "Student participates in Evaluation" .
+
+### Example instances (aligned to diagram)
+ev:student001 a ev:Student ;
+    ev:studentId "S001" ;
+    ev:name "Inès Étudiant" ;
+    ev:email "ines@example.org" .
+
+ev:instructorA a ev:Instructor ;
+    ev:name "Dr. Dupont" ;
+    ev:email "dupont@example.edu" .
+
+ev:courseML a ev:Course ;
+    ev:courseId "CS500" ;
+    ev:title "Machine Learning (Master)" ;
+    ev:code "ML-2026" ;
+    ev:credits "6"^^xsd:integer ;
+    ev:teaches ev:instructorA .
+
+ev:examFinal a ev:Evaluation ;
+    ev:evaluationId "EV-001" ;
+    ev:date "2026-01-15T09:00:00"^^xsd:dateTime ;
+    ev:type "final" ;
+    ev:maxScore "100"^^xsd:decimal ;
+    ev:producesGrade ev:grade001 .
+
+ev:grade001 a ev:Grade ;
+    ev:gradeId "G-001" ;
+    ev:score "78"^^xsd:decimal ;
+    ev:gradeLetter "B" .
+
+# Relations matching the diagram
+ev:student001 ev:participatesIn ev:examFinal .
+ev:student001 ev:receivesGrade ev:grade001 .
+ev:courseML ev:includesEvaluation ev:examFinal .
+ev:courseML ev:containsGrade ev:grade001 .
+

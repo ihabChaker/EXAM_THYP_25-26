@@ -26,13 +26,11 @@ erDiagram
 		EVALUATION {
 			string evalId PK
 			date date
-			string type
 			decimal maxScore
 		}
 		GRADE {
 			string gradeId PK
 			decimal score
-			string gradeLetter
 		}
 
 		STUDENT ||--o{ GRADE : receives
